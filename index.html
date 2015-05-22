@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Getting-and-cleaning-data-may-2015 by sudhakar-valluru2000</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Getting-and-cleaning-data-may-2015</h1>
+      <h2 class="project-tagline">Getting and Cleaning Data Course Project</h2>
+      <a href="https://github.com/sudhakar-valluru2000/Getting-and-Cleaning-Data-May-2015" class="btn">View on GitHub</a>
+      <a href="https://github.com/sudhakar-valluru2000/Getting-and-Cleaning-Data-May-2015/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/sudhakar-valluru2000/Getting-and-Cleaning-Data-May-2015/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="getting-and-cleaning-data-may-2015" class="anchor" href="#getting-and-cleaning-data-may-2015" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting-and-Cleaning-Data-May-2015</h1>
+
+<p>Getting and Cleaning Data Course Project</p>
+
+<h1>
+<a id="goal" class="anchor" href="#goal" aria-hidden="true"><span class="octicon octicon-link"></span></a>GOAL</h1>
+
+<p>You should create one R script called run_analysis.R that does the following. 
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+3. Uses descriptive activity names to name the activities in the data set
+4. Appropriately labels the data set with descriptive variable names. 
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.</p>
+
+<p>The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. You will be graded by your peers on a series of yes/no questions related to the project. You will be required to submit: 1) a tidy data set as described below, 2) a link to a Github repository with your script for performing the analysis, and 3) a code book that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md. You should also include a README.md in the repo with your scripts. This repo explains how all of the scripts work and how they are connected. </p>
+
+<p>One of the most exciting areas in all of data science right now is wearable computing - see for example this article . Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained:</p>
+
+<p><a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a></p>
+
+<p>Here are the data for the project:</p>
+
+<p><a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a></p>
+
+<h1>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h1>
+
+<p>A full description is available at the site where the data was obtained:
+<a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a>
+Here are the data for the project:
+<a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a> 
+is downloaded and extracted in the R Home Directory.</p>
+
+<p>The R code in run_analysis.R proceeds under the assumption that the above files are unzipped in the home directory and available</p>
+
+<h1>
+<a id="pre-step-a--" class="anchor" href="#pre-step-a--" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Step (a) -</h1>
+
+<h1>
+<a id="read-the-following-file-first-to-understand-the-data-and-the-structure" class="anchor" href="#read-the-following-file-first-to-understand-the-data-and-the-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Read the following file first to understand the data and the structure</h1>
+
+<p>subject_test.txt
+y_test.txt
+X_test.txt
+subject_train.txt
+y_train.txt
+X_train.txt
+features.txt
+activity_labels.txt</p>
+
+<h1>
+<a id="library-used-for-this-project" class="anchor" href="#library-used-for-this-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Library Used for this project.</h1>
+
+<p>library (dplyr)
+library (tidyr)
+library(reshape2)</p>
+
+<h1>
+<a id="read-datafiles-into-their-respective-data-frames" class="anchor" href="#read-datafiles-into-their-respective-data-frames" aria-hidden="true"><span class="octicon octicon-link"></span></a>Read datafiles into their respective data frames</h1>
+
+<p>df_subject_test &lt;- read.table ("./subject_test.txt")</p>
+
+<p>df_y_test &lt;- read.table ("./y_test.txt")</p>
+
+<p>df_X_test &lt;- read.table ("./X_test.txt")</p>
+
+<p>df_subject_train &lt;- read.table ("./subject_train.txt")</p>
+
+<p>df_y_train &lt;- read.table ("./y_train.txt")</p>
+
+<p>df_X_train &lt;- read.table ("./X_train.txt")</p>
+
+<p>df_features &lt;- read.table ("./features.txt")</p>
+
+<p>df_activity_labels &lt;- read.table ("./activity_labels.txt")
+names(df_activity_labels) &lt;- c("Activity", "Activity_Label")</p>
+
+<h1>
+<a id="pre-step-b--" class="anchor" href="#pre-step-b--" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Step (b) -</h1>
+
+<h1>
+<a id="merge-data-frames-subjects" class="anchor" href="#merge-data-frames-subjects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge data frames Subjects</h1>
+
+<p>subject &lt;- rbind(df_subject_train, df_subject_test)</p>
+
+<h1>
+<a id="merge-activity" class="anchor" href="#merge-activity" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge Activity</h1>
+
+<p>activity &lt;- rbind (df_y_train, df_y_test)</p>
+
+<h1>
+<a id="merge-features" class="anchor" href="#merge-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge Features</h1>
+
+<p>features &lt;- rbind (df_X_train, df_X_test)</p>
+
+<h1>
+<a id="pre-step-c--" class="anchor" href="#pre-step-c--" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Step (c) -</h1>
+
+<h1>
+<a id="add-column-names-to-features-from-original-features-file" class="anchor" href="#add-column-names-to-features-from-original-features-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add column names to features from original features file</h1>
+
+<p>names(features) &lt;- t(df_features[2])</p>
+
+<h1>
+<a id="add-column-names-to-activity" class="anchor" href="#add-column-names-to-activity" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add column names to activity</h1>
+
+<p>names(activity) &lt;- "Activity"</p>
+
+<h1>
+<a id="add-column-name-to-subject" class="anchor" href="#add-column-name-to-subject" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add column name to subject</h1>
+
+<p>names(subject) &lt;- "Subject"</p>
+
+<h2>
+<a id="1-merges-the-training-and-the-test-sets-to-create-one-data-set" class="anchor" href="#1-merges-the-training-and-the-test-sets-to-create-one-data-set" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Merges the training and the test sets to create one data set.</h2>
+
+<h1>
+<a id="merge-the-above-3-features-activity-and-subject-into-one-huge-big-data" class="anchor" href="#merge-the-above-3-features-activity-and-subject-into-one-huge-big-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge the above 3 features, activity and subject into one HUGE big data</h1>
+
+<p>bigdata &lt;- cbind(features, activity, subject)</p>
+
+<h1>
+<a id="extract-fields-with-mean-and-std-standard-deviation" class="anchor" href="#extract-fields-with-mean-and-std-standard-deviation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extract fields with mean and std (standard deviation)</h1>
+
+<h2>
+<a id="2-extracts-only-the-measurements-on-the-mean-and-standard-deviation-for-each-measurement" class="anchor" href="#2-extracts-only-the-measurements-on-the-mean-and-standard-deviation-for-each-measurement" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Extracts only the measurements on the mean and standard deviation for each measurement.</h2>
+
+<h1>
+<a id="get_mean_std---greplmeanstd-namesbigdata-ignorecasetrue" class="anchor" href="#get_mean_std---greplmeanstd-namesbigdata-ignorecasetrue" aria-hidden="true"><span class="octicon octicon-link"></span></a>get_mean_std &lt;- grepl("mean|std", names(bigdata), ignore.case=TRUE)</h1>
+
+<p>get_mean_std &lt;- grep(".<em>Mean.</em>|.<em>Std.</em>",names(bigdata), ignore.case=TRUE)</p>
+
+<h1>
+<a id="append-filds-562-563-which-are-activity-and-subject" class="anchor" href="#append-filds-562-563-which-are-activity-and-subject" aria-hidden="true"><span class="octicon octicon-link"></span></a>Append filds 562, 563 which are Activity and Subject</h1>
+
+<p>all_fields &lt;- c(get_mean_std, 562, 563)
+dim(all_fields)</p>
+
+<h1>
+<a id="select-data-with-mean-std-562-and-563" class="anchor" href="#select-data-with-mean-std-562-and-563" aria-hidden="true"><span class="octicon octicon-link"></span></a>Select data with mean, std, 562 and 563</h1>
+
+<p>fetch_data &lt;- bigdata[,all_fields]</p>
+
+<h2>
+<a id="3-uses-descriptive-activity-names-to-name-the-activities-in-the-data-set" class="anchor" href="#3-uses-descriptive-activity-names-to-name-the-activities-in-the-data-set" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Uses descriptive activity names to name the activities in the data set</h2>
+
+<p>fetch_data_w_activity &lt;- arrange(join(fetch_data, df_activity_labels), Activity )</p>
+
+<h2>
+<a id="4-appropriately-labels-the-data-set-with-descriptive-activity-names" class="anchor" href="#4-appropriately-labels-the-data-set-with-descriptive-activity-names" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Appropriately labels the data set with descriptive activity names.</h2>
+
+<h1>
+<a id="rename-column-names-to-make-them-more-self-explanatory" class="anchor" href="#rename-column-names-to-make-them-more-self-explanatory" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rename column names to make them more self explanatory</h1>
+
+<p>names(fetch_data_w_activity) &lt;- gsub("-mean()", "Mean", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) &lt;- gsub("-std()", "STD", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) &lt;- gsub("BodyBody", "Body", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) &lt;- gsub("^f", "Freq", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) &lt;- gsub("-freq()", "Freq", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) &lt;- gsub("^t", "Time", names(fetch_data_w_activity), ignore.case = TRUE)</p>
+
+<p>names(fetch_data_w_activity) &lt;- gsub("()", "", names(fetch_data_w_activity), ignore.case = TRUE)</p>
+
+<h2>
+<a id="5-creates-a-second-independent-tidy-data-set-with-the-average-of-each-variable-for-each-activity-and-each-subject" class="anchor" href="#5-creates-a-second-independent-tidy-data-set-with-the-average-of-each-variable-for-each-activity-and-each-subject" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.</h2>
+
+<h1>
+<a id="rearrange-the-data-to-wide-format-with-melt-function-with-subject-activity-and-activity_label" class="anchor" href="#rearrange-the-data-to-wide-format-with-melt-function-with-subject-activity-and-activity_label" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rearrange the data to wide format with melt function with Subject, Activity and Activity_Label</h1>
+
+<p>melt_data &lt;- melt(fetch_data_w_activity, id = c("Subject", "Activity", "Activity_Label"))</p>
+
+<h1>
+<a id="tidaydata-or-rearrange-using-dcast-and-find-mean" class="anchor" href="#tidaydata-or-rearrange-using-dcast-and-find-mean" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tidaydata or rearrange using dcast and find mean</h1>
+
+<p>tidydata &lt;- dcast(melt_data, Subject + Activity_Label ~ variable, mean)</p>
+
+<h1>
+<a id="printheadtidydata" class="anchor" href="#printheadtidydata" aria-hidden="true"><span class="octicon octicon-link"></span></a>print(head(tidydata))</h1>
+
+<h1>
+<a id="write-final-data-into-a-file" class="anchor" href="#write-final-data-into-a-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Write final data into a file</h1>
+
+<p>write.table (tidydata, "./Tidydata.txt", row.names=FALSE)</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/sudhakar-valluru2000/Getting-and-Cleaning-Data-May-2015">Getting-and-cleaning-data-may-2015</a> is maintained by <a href="https://github.com/sudhakar-valluru2000">sudhakar-valluru2000</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
