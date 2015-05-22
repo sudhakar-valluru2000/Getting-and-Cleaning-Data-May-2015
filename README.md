@@ -1,6 +1,9 @@
 # Getting-and-Cleaning-Data-May-2015
 Getting and Cleaning Data Course Project
-GOAL
+
+#GOAL
+
+
  You should create one R script called run_analysis.R that does the following. 
 1. Merges the training and the test sets to create one data set.
 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
@@ -18,7 +21,7 @@ Here are the data for the project:
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-Getting Started
+#Getting Started
 
 A full description is available at the site where the data was obtained:
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
@@ -28,7 +31,7 @@ is downloaded and extracted in the R Home Directory.
 
 The R code in run_analysis.R proceeds under the assumption that the above files are unzipped in the home directory and available
 
-# Read the following file first to understand the data and the structure
+#Read the following file first to understand the data and the structure
 #subject_test.txt
 #y_test.txt
 #X_test.txt
