@@ -20,3 +20,4 @@ The input data containts the following data files:
    activity_labels.txt contains metadata on the different types of activities.
    features.txt contains the name of the features in the data sets.
    
+   
