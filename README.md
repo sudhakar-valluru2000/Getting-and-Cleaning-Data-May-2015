@@ -18,5 +18,26 @@ Here are the data for the project:
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
+Getting Started
+
+A full description is available at the site where the data was obtained:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+Here are the data for the project:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+is downloaded and extracted in the R Home Directory.
+
+The R code in run_analysis.R proceeds under the assumption that the above files are unzipped in the home directory and available
+
+# Read the following file first to understand the data and the structure
+#subject_test.txt
+#y_test.txt
+#X_test.txt
+#subject_train.txt
+#y_train.txt
+#X_train.txt
+#features.txt
+#activity_labels.txt
+
+
 
 
