@@ -34,12 +34,19 @@ The R code in run_analysis.R proceeds under the assumption that the above files 
 #Pre-Step (a) - 
 #Read the following file first to understand the data and the structure
 subject_test.txt
+
 y_test.txt
+
 X_test.txt
+
 subject_train.txt
+
 y_train.txt
+
 X_train.txt
+
 features.txt
+
 activity_labels.txt
 
 
