@@ -27,6 +27,43 @@ activity_labels.txt contains metadata on the different types of activities.
 
 features.txt contains the name of the features in the data sets.
 
+#Merge data frames Subjects
+subject <- rbind(df_subject_train, df_subject_test)
 
-   
+#Merge Activity
+activity <- rbind (df_y_train, df_y_test)
+
+#Merge Features
+features <- rbind (df_X_train, df_X_test)
+
+
+## 1. Merges the training and the test sets to create one data set.
+bigdata <- cbind(features, activity, subject)
+
+## 2. Extracts only the measurements on the mean and standard deviation for each measurement.
+fetch_data <- bigdata[,all_fields]
+
+## 3. Uses descriptive activity names to name the activities in the data set
+fetch_data_w_activity <- arrange(join(fetch_data, df_activity_labels), Activity )
+
+## 4. Appropriately labels the data set with descriptive activity names.
+names(fetch_data_w_activity) <- gsub("-mean()", "Mean", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) <- gsub("-std()", "STD", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) <- gsub("BodyBody", "Body", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) <- gsub("^f", "Freq", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) <- gsub("-freq()", "Freq", names(fetch_data_w_activity), ignore.case = TRUE)
+names(fetch_data_w_activity) <- gsub("^t", "Time", names(fetch_data_w_activity), ignore.case = TRUE)
+
+## 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+melt_data <- melt(fetch_data_w_activity, id = c("Subject", "Activity", "Activity_Label"))
+
+#Tidaydata or rearrange using dcast and find mean
+tidydata <- dcast(melt_data, Subject + Activity_Label ~ variable, mean)
+#Write final data into a file
+write.table (tidydata, "./Tidydata.txt", row.names=FALSE)
+
+
+#Output Data Set
+
+The output data Tidydata.txt is a a space-delimited value file. The header line contains the names of the variables. It contains the mean and standard deviation values of the data contained in the input files. The header is restructued in an understandable manner. 
    
