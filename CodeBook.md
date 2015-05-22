@@ -11,10 +11,12 @@ The data set used can be downloaded from https://d396qusza40orc.cloudfront.net/g
 
 The input data containts the following data files:
 
-   X_train.txt contains variable features that are intended for training.
-    y_train.txt contains the activities corresponding to X_train.txt.
-    subject_train.txt contains information on the subjects from whom data is collected.
-    X_test.txt contains variable features that are intended for testing.
-    y_test.txt contains the activities corresponding to X_test.txt.
-    subject_test.txt contains information on the subjects from whom data is collected.
-    activity_labels.txt contains metadata on the different types of acti
+   x_train.txt contains variable features that are intended for training.
+   y_train.txt contains the activities corresponding to X_train.txt.
+   subject_train.txt contains information on the subjects from whom data is collected.
+   X_test.txt contains variable features that are intended for testing.
+   y_test.txt contains the activities corresponding to X_test.txt.
+   subject_test.txt contains information on the subjects from whom data is collected.
+   activity_labels.txt contains metadata on the different types of activities.
+   features.txt contains the name of the features in the data sets.
+   
