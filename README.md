@@ -124,7 +124,7 @@ names(fetch_data_w_activity) <- gsub("()", "", names(fetch_data_w_activity), ign
 #Rearrange the data to wide format with melt function with Subject, Activity and Activity_Label
 melt_data <- melt(fetch_data_w_activity, id = c("Subject", "Activity", "Activity_Label"))
 
-#Tidayfata or rearrange using dcast and find mean
+#Tidaydata or rearrange using dcast and find mean
 tidydata <- dcast(melt_data, Subject + Activity_Label ~ variable, mean)
 #print(head(tidydata))
 #Write final data into a file
